@@ -1,0 +1,18 @@
+{
+  "label": {
+    "login": "Login",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "error": {
+    "userNotValid": "You do not have permission, please sign in.",
+    "userNotExist": "Username does not exist",
+    "passwordNotMatch": "Invalid Password"
+  },
+  "base": {
+    "account": "Account",
+    "backofficeUser": "Backoffice User",
+    "logout": "Logout"
+  }
+}
