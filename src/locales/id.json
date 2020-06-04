@@ -28,7 +28,7 @@
   "affiliateManagement": {
     "title": "Kelola Affiliate",
     "tableHeader": {
-      "no": "No.",
+      "no": "Nomor",
       "code": "Kode",
       "name": "Nama",
       "email": "Email",

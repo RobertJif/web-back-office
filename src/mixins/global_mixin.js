@@ -10,6 +10,13 @@ export default {
         this.$router.push({ path: "/login" });
       });
     },
+    toast(text, color, active = true) {
+      this.$store.dispatch("UPDATE_SNACKBAR", {
+        text: text,
+        color: color,
+        active: active
+      });
+    }
   },
   computed: {
     locales() {

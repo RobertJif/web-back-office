@@ -4,12 +4,16 @@
     "manage": "Manage",
     "create": "Create",
     "update": "Update",
-    "delete": "Delete"
+    "delete": "Delete",
+    "submit": "Submit"
   },
   "error": {
     "userNotValid": "You do not have permission, please sign in.",
     "userNotExist": "Username does not exist",
     "passwordNotMatch": "Invalid Password"
+  },
+  "success": {
+    "itemCreated": "Created successfully"
   },
   "base": {
     "account": "Account",
@@ -34,15 +38,24 @@
       "email": "Email",
       "phone": "Phone",
       "actions": "Actions"
+    },
+    "create": {
+      "title": "Create new affiliate",
+      "personalInformation": "Personal Information",
+      "accountInformation": "Account Information"
     }
   },
   "fields": {
     "affCode": "Affiliate Code",
     "email": "Email",
     "password": "Password",
-    "username": "Username"
+    "username": "Username",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "phone": "Phone"
   },
   "validation": {
+    "strongPassword": "The {_field_} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number, and one special character",
     "alpha": "The {_field_} field may only contain alphabetic characters",
     "alpha_num": "The {_field_} field may only contain alpha-numeric characters",
     "alpha_dash": "The {_field_} field may contain alpha-numeric characters as well as dashes and underscores",

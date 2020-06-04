@@ -10,6 +10,8 @@ import i18n from "./plugins/i18n";
 import gb_mixin from "./mixins/global_mixin";
 import "./plugins/vee-validate";
 
+import "./assets/css/main.css"
+
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
