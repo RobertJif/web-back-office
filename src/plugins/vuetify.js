@@ -1,10 +1,14 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vue from "vue";
+import Vuetify from "vuetify/lib";
+import i18n from "./i18n";
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
-    theme: {
-        dark: true
-    }
+  theme: {
+    dark: true,
+  },
+  lang: {
+    t: (key, ...params) => i18n.t(key, params),
+  },
 });

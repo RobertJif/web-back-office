@@ -1,0 +1,123 @@
+{
+  "label": {
+    "login": "Masuk",
+    "manage": "Kelola",
+    "create": "Tambah",
+    "update": "Ubah",
+    "delete": "Hapus"
+  },
+  "error": {
+    "userNotValid": "Anda tidak memiliki hak akses, silahkan masuk dahulu.",
+    "userNotExist": "Nama pengguna tidak ditemukan",
+    "passwordNotMatch": "Kata sandi belum benar"
+  },
+  "base": {
+    "account": "Akun",
+    "backofficeUser": "Pengguna backoffice",
+    "logout": "Keluar",
+    "username": "Nama Pengguna",
+    "password": "Kata Sandi"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "affiliateManagement": "Kelola Affiliate"
+  },
+  "login": {
+    "backofficeLogin": "Masuk Backoffice"
+  },
+  "affiliateManagement": {
+    "title": "Kelola Affiliate",
+    "tableHeader": {
+      "no": "No.",
+      "code": "Kode",
+      "name": "Nama",
+      "email": "Email",
+      "phone": "Telepon",
+      "actions": "Aksi"
+    }
+  },
+  "fields": {
+    "affCode": "Kode Affiliate",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "username": "Nama Pengguna"
+  },
+  "validation": {
+    "alpha": "{_field_} hanya boleh mengandung karakter alfabet",
+    "alpha_num": "{_field_} hanya boleh mengandung karakter alfanumerik",
+    "alpha_dash": "{_field_} boleh mengandung karakter alfanumerik, tanda hubung, dan garis bawah",
+    "alpha_spaces": "{_field_} hanya boleh berisi karakter alfabet serta spasi",
+    "between": "{_field_} harus di antara {min} dan {max}",
+    "confirmed": "{_field_} tidak cocok dengan {target}",
+    "digits": "{_field_} harus berupa {length} digit angka",
+    "dimensions": "{_field_} harus berdimensi lebar {width} pixel dan tinggi {height} pixel",
+    "email": "{_field_} harus berupa alamat surel yang benar",
+    "excluded": "{_field_} harus berupa nilai yang sah",
+    "ext": "{_field_} harus berupa berkas yang benar",
+    "image": "{_field_} harus berupa gambar",
+    "integer": "{_field_} harus berupa bilangan bulat",
+    "length": "Panjang {_field_} harus tepat {length}",
+    "max_value": "Nilai {_field_} tidak boleh lebih dari {max}",
+    "max": "{_field_} tidak boleh lebih dari {length} karakter",
+    "mimes": "Tipe berkas {_field_} harus benar",
+    "min_value": "Nilai {_field_} tidak boleh kurang dari {min}",
+    "min": "{_field_} minimal mengandung {length} karakter",
+    "numeric": "{_field_} harus berupa angka",
+    "oneOf": "{_field_} harus berupa nilai yang sah",
+    "regex": "Format {_field_} salah",
+    "required": "{_field_} harus diisi",
+    "required_if": "{_field_} harus diisi",
+    "size": "{_field_} harus lebih kecil dari {size}KB"
+  },
+  "$vuetify": {
+    "badge": "Lencana",
+    "close": "Tutup",
+    "dataIterator": {
+      "noResultsText": "Tidak ditemukan catatan yang cocok",
+      "loadingText": "Memuat data..."
+    },
+    "dataTable": {
+      "itemsPerPageText": "Baris per halaman:",
+      "ariaLabel": {
+        "sortDescending": "Diurutkan kebawah.",
+        "sortAscending": "Diurutkan keatas.",
+        "sortNone": "Tidak diurutkan.",
+        "activateNone": "Aktifkan untuk menghapus penyortiran.",
+        "activateDescending": "Aktifkan untuk mengurutkan kebawah.",
+        "activateAscending": "Aktifkan untuk mengurutkan keatas."
+      },
+      "sortBy": "Urutkan berdasar"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Item per halaman:",
+      "itemsPerPageAll": "Semua",
+      "nextPage": "Halaman selanjutnya",
+      "prevPage": "Halaman sebelumnya",
+      "firstPage": "Halaman pertama",
+      "lastPage": "Halaman terakhir",
+      "pageText": "{0}-{1} dari {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "{0} dipilih"
+    },
+    "noDataText": "Tidak ada data tersedia",
+    "carousel": {
+      "prev": "Visual sebelumnya",
+      "next": "Visual selanjutnya",
+      "ariaLabel": {
+        "delimiter": "Carousel slide {0} of {1}"
+      }
+    },
+    "calendar": {
+      "moreEvents": "{0} lagi"
+    },
+    "fileInput": {
+      "counter": "{0} berkas",
+      "counterSize": "{0} berkas (dari total {1})"
+    },
+    "timePicker": {
+      "am": "AM",
+      "pm": "PM"
+    }
+  }
+}

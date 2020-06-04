@@ -10,16 +10,16 @@ export default new Vuex.Store({
     snackbar: {
       active: false,
       color: "success",
-      text: ""
-    }
+      text: "",
+    },
   },
   mutations: {
     SET_ACCESS_TOKEN(state, data) {
       localStorage.setItem("accessToken", data.accessToken);
     },
     SET_USER_DATA(state, data) {
-      localStorage.setItem("username", data.userData.username)
-      localStorage.setItem("id", data.userData.id)
+      localStorage.setItem("username", data.userData.username);
+      localStorage.setItem("id", data.userData.id);
     },
     REMOVE_ACCESS_TOKEN(state, data) {
       localStorage.removeItem("accessToken");
@@ -29,38 +29,35 @@ export default new Vuex.Store({
       localStorage.removeItem("id");
     },
     SET_SNACKBAR_PROPERTIES(state, data) {
-      console.log("mutation", data)
-      state.snackbar = data
-    }
+      state.snackbar = data;
+    },
   },
   actions: {
     REMOVE_USER_DATA({ commit }) {
       return new Promise((resolve) => {
-
-        commit("REMOVE_ACCESS_TOKEN")
-        commit("REMOVE_USER_DATA")
+        commit("REMOVE_ACCESS_TOKEN");
+        commit("REMOVE_USER_DATA");
         resolve();
-      })
+      });
     },
     UPDATE_USER_DATA({ commit }, data) {
       return new Promise((resolve) => {
-        commit("SET_ACCESS_TOKEN", data)
-        commit("SET_USER_DATA", data)
+        commit("SET_ACCESS_TOKEN", data);
+        commit("SET_USER_DATA", data);
 
-        resolve()
-      })
+        resolve();
+      });
     },
     UPDATE_SNACKBAR({ commit }, data) {
       return new Promise((resolve) => {
-
-        commit("SET_SNACKBAR_PROPERTIES", data)
-        resolve()
-      })
-    }
+        commit("SET_SNACKBAR_PROPERTIES", data);
+        resolve();
+      });
+    },
   },
   getters: {
-    auth: state => state.auth,
-    snackbar: state => state.snackbar
+    auth: (state) => state.auth,
+    snackbar: (state) => state.snackbar,
   },
-  modules: {}
+  modules: {},
 });

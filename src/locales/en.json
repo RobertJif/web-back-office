@@ -1,6 +1,7 @@
 {
   "label": {
     "login": "Login",
+    "manage": "Manage",
     "create": "Create",
     "update": "Update",
     "delete": "Delete"
@@ -13,6 +14,110 @@
   "base": {
     "account": "Account",
     "backofficeUser": "Backoffice User",
-    "logout": "Logout"
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password"
+  },
+  "navigation": {
+    "home": "Home",
+    "affiliateManagement": "Affiliate Management"
+  },
+  "login": {
+    "backofficeLogin": "Backoffice Login"
+  },
+  "affiliateManagement": {
+    "title": "Affiliate Management",
+    "tableHeader": {
+      "no": "No.",
+      "code": "Code",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "actions": "Actions"
+    }
+  },
+  "fields": {
+    "affCode": "Affiliate Code",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username"
+  },
+  "validation": {
+    "alpha": "The {_field_} field may only contain alphabetic characters",
+    "alpha_num": "The {_field_} field may only contain alpha-numeric characters",
+    "alpha_dash": "The {_field_} field may contain alpha-numeric characters as well as dashes and underscores",
+    "alpha_spaces": "The {_field_} field may only contain alphabetic characters as well as spaces",
+    "between": "The {_field_} field must be between {min} and {max}",
+    "confirmed": "The {_field_} field confirmation does not match",
+    "digits": "The {_field_} field must be numeric and exactly contain {length} digits",
+    "dimensions": "The {_field_} field must be {width} pixels by {height} pixels",
+    "email": "The {_field_} field must be a valid email",
+    "excluded": "The {_field_} field is not a valid value",
+    "ext": "The {_field_} field is not a valid file",
+    "image": "The {_field_} field must be an image",
+    "integer": "The {_field_} field must be an integer",
+    "length": "The {_field_} field must be {length} long",
+    "max_value": "The {_field_} field must be {max} or less",
+    "max": "The {_field_} field may not be greater than {length} characters",
+    "mimes": "The {_field_} field must have a valid file type",
+    "min_value": "The {_field_} field must be {min} or more",
+    "min": "The {_field_} field must be at least {length} characters",
+    "numeric": "The {_field_} field may only contain numeric characters",
+    "oneOf": "The {_field_} field is not a valid value",
+    "regex": "The {_field_} field format is invalid",
+    "required_if": "The {_field_} field is required",
+    "required": "The {_field_} field is required",
+    "size": "The {_field_} field size must be less than {size}KB"
+  },
+  "$vuetify": {
+    "badge": "Badge",
+    "close": "Close",
+    "dataIterator": {
+      "noResultsText": "No matching records found",
+      "loadingText": "Loading items..."
+    },
+    "dataTable": {
+      "itemsPerPageText": "Rows per page:",
+      "ariaLabel": {
+        "sortDescending": "Sorted descending.",
+        "sortAscending": "Sorted ascending.",
+        "sortNone": "Not sorted.",
+        "activateNone": "Activate to remove sorting.",
+        "activateDescending": "Activate to sort descending.",
+        "activateAscending": "Activate to sort ascending."
+      },
+      "sortBy": "Sort by"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Items per page:",
+      "itemsPerPageAll": "All",
+      "nextPage": "Next page",
+      "prevPage": "Previous page",
+      "firstPage": "First page",
+      "lastPage": "Last page",
+      "pageText": "{0}-{1} of {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "{0} selected"
+    },
+    "noDataText": "No data available",
+    "carousel": {
+      "prev": "Previous visual",
+      "next": "Next visual",
+      "ariaLabel": {
+        "delimiter": "Carousel slide {0} of {1}"
+      }
+    },
+    "calendar": {
+      "moreEvents": "{0} more"
+    },
+    "fileInput": {
+      "counter": "{0} files",
+      "counterSize": "{0} files ({1} in total)"
+    },
+    "timePicker": {
+      "am": "AM",
+      "pm": "PM"
+    }
   }
 }

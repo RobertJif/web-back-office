@@ -1,20 +1,17 @@
-
 import axios from "axios";
 
-// For common config
-axios.defaults.headers.post["Content-Type"] = "application/json";
-
-const secureAxios = axios.create({
-    baseURL: 'http://localhost:3000/backoffice'
+const instance = axios.create({
+  baseURL: process.env.VUE_APP_API_URL,
 });
 
-const baseAxios = axios.create({
-    baseURL: 'http://localhost:3000'
+instance.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = `bearer ${localStorage.getItem(
+      "accessToken"
+    )}`;
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-});
-
-
-export {
-    secureAxios,
-    baseAxios
-};
+export default instance;

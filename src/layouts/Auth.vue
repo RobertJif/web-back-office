@@ -4,23 +4,35 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      :right="$vuetify.rtl"
       :mini-variant="$vuetify.breakpoint.lgAndUp"
       hide-overlay
       :expand-on-hover="$vuetify.breakpoint.lgAndUp"
     >
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.text" link :to="item.link">
+        <v-list-item
+          v-for="navi in navigations"
+          :key="navi.text"
+          link
+          :to="navi.link"
+        >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ navi.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
+            <v-list-item-title>{{ navi.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark dense>
+    <v-app-bar
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
+      app
+      color="blue darken-3"
+      dark
+      dense
+    >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down">Backoffice</span>
@@ -28,17 +40,15 @@
       <v-spacer></v-spacer>
       <v-menu open-on-hover offset-y>
         <template v-slot:activator="{ on }">
-          <v-btn text v-on="on">
-            <v-icon>mdi-translate</v-icon>&nbsp;
-          </v-btn>
+          <v-btn icon v-on="on">{{ $i18n.locale }}</v-btn>
         </template>
         <v-list>
           <v-list-item
-            v-for="(locale, index) in $store.state.locales"
+            v-for="(locale, index) in locales"
             :key="index"
-            @click="ChangeActiveLanguage(locale.code)"
+            @click="changeLocale(locale)"
           >
-            <v-list-item-title>{{ locale.lang }}</v-list-item-title>
+            <v-list-item-title>{{ locale.toUpperCase() }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -47,34 +57,39 @@
       </v-btn>
 
       <!--User Profile Dropdown-->
-      <v-menu v-model="flags.accountMenu" :close-on-content-click="false" :nudge-height="100">
+      <v-menu
+        v-model="flags.accountMenu"
+        :close-on-content-click="false"
+        offset-y
+      >
         <template v-slot:activator="{ on }">
-          <v-btn text v-on="on">
-            {{$t("base.account")}}
-            <v-icon right>mdi-chevron-down</v-icon>
+          <v-btn v-on="on" icon>
+            <v-icon>mdi-account</v-icon>
           </v-btn>
         </template>
 
         <v-card>
-          <v-list>
+          <v-list class="pa-0 ma-0">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>{{username}}</v-list-item-title>
-                <v-list-item-subtitle>{{$t("base.backofficeUser")}}</v-list-item-subtitle>
+                <v-list-item-title>{{ username }}</v-list-item-title>
+                <v-list-item-subtitle>{{
+                  $t("base.backofficeUser")
+                }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
 
           <v-divider></v-divider>
 
-          <v-list dense subheader>
+          <v-list dense>
             <v-list-item-group color="primary">
-              <v-list-item @click="logout()">
-                <v-list-item-avatar>
+              <v-list-item @click="logout()" class="pa-0 ma-0">
+                <v-list-item-avatar class="pa-0 ma-0">
                   <v-icon>mdi-logout</v-icon>
                 </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>{{$t("base.logout")}}</v-list-item-title>
+                <v-list-item-content class="pa-0 ma-0">
+                  <v-list-item-title>{{ $t("base.logout") }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -83,7 +98,7 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container class="pa-1 ma-0">
+      <v-container class="pa-1 ma-0" fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
@@ -94,49 +109,34 @@
 export default {
   name: "DefaultContainer",
   props: {
-    source: String
+    source: String,
   },
   data: () => ({
     drawer: null,
     flags: {
-      accountMenu: false
-    }
+      accountMenu: false,
+    },
   }),
-  methods: {
-    logout() {
-      this.$store.dispatch("REMOVE_USER_DATA").then(() => {
-        this.$router.push({ path: "/login" });
-      });
-    }
-  },
+  methods: {},
   mounted() {},
   computed: {
-    username() {
-      return localStorage.getItem("username");
-    },
-    items() {
+    navigations() {
       return [
         {
           icon: "mdi-home",
-          text: "Home",
+          text: this.$t("navigation.home"),
           link: "/",
-          name: "Home"
+          name: "Home",
         },
         {
-          icon: "mdi-history",
-          text: "Management",
-          link: "management",
-          name: "Management"
+          icon: "mdi-account-supervisor",
+          text: this.$t("navigation.affiliateManagement"),
+          link: "affiliate-management",
+          name: "AffiliateManagement",
         },
-        {
-          icon: "mdi-contacts",
-          text: "About",
-          link: "about",
-          name: "About"
-        }
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 
