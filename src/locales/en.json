@@ -5,7 +5,11 @@
     "create": "Create",
     "update": "Update",
     "delete": "Delete",
-    "submit": "Submit"
+    "submit": "Submit",
+    "affiliate": "Affiliate",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search"
   },
   "error": {
     "userNotValid": "You do not have permission, please sign in.",
@@ -13,7 +17,9 @@
     "passwordNotMatch": "Invalid Password"
   },
   "success": {
-    "itemCreated": "Created successfully"
+    "itemCreated": "New {itemName} created successfully",
+    "itemUpdated": "{itemName} details updated successfully",
+    "itemDeleted": "{itemName} deleted successfully"
   },
   "base": {
     "account": "Account",
@@ -43,6 +49,11 @@
       "title": "Create new affiliate",
       "personalInformation": "Personal Information",
       "accountInformation": "Account Information"
+    },
+    "update": {
+      "title": "Update affiliate information",
+      "personalInformation": "Personal Information",
+      "accountInformation": "Account Information"
     }
   },
   "fields": {
@@ -55,7 +66,7 @@
     "phone": "Phone"
   },
   "validation": {
-    "strongPassword": "The {_field_} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number, and one special character",
+    "strongPassword": "The {_field_} must contain at least: 1 uppercase letter, number, and special character",
     "alpha": "The {_field_} field may only contain alphabetic characters",
     "alpha_num": "The {_field_} field may only contain alpha-numeric characters",
     "alpha_dash": "The {_field_} field may contain alpha-numeric characters as well as dashes and underscores",
@@ -132,5 +143,11 @@
       "am": "AM",
       "pm": "PM"
     }
+  },
+  "tooltip": {
+    "openFilterMenu": "Open filters menu for affiliate list table"
+  },
+  "dialog": {
+    "askDelete": "Delete {item}?<br/>You won't be able to recover this data later."
   }
 }

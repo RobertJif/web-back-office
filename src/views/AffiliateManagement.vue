@@ -1,7 +1,81 @@
 <template>
   <div class="affiliate-management">
     <v-card>
-      <v-card-actions class="title">{{ $t("affiliateManagement.title") }}</v-card-actions>
+      <v-card-actions class="title">
+        {{ $t("affiliateManagement.title") }}&nbsp;
+        <v-btn small color="primary" icon @click="flags.isFilterMenuOpen = !flags.isFilterMenuOpen">
+          <v-icon small>mdi-filter-menu</v-icon>
+        </v-btn>
+      </v-card-actions>
+      <v-expand-transition>
+        <div v-show="flags.isFilterMenuOpen">
+          <v-divider></v-divider>
+
+          <v-card-text>
+            <v-row dense>
+              <v-col md="3" sm="3" cols="12">
+                <v-text-field
+                  id="affCode"
+                  :label="$t('fields.affCode')"
+                  name="affCode"
+                  dense
+                  type="text"
+                  v-model="filter.code"
+                  clearable
+                  @click:clear="getAffiliateList"
+                  @keypress.enter="getAffiliateList"
+                ></v-text-field>
+              </v-col>
+              <v-col md="3" sm="3" cols="12">
+                <v-text-field
+                  id="firstname"
+                  :label="$t('fields.firstname')"
+                  name="firstname"
+                  dense
+                  type="text"
+                  v-model="filter.firstname"
+                  clearable
+                  @click:clear="getAffiliateList"
+                  @keypress.enter="getAffiliateList"
+                ></v-text-field>
+              </v-col>
+              <v-col md="3" sm="3" cols="12">
+                <v-text-field
+                  id="lastname"
+                  :label="$t('fields.lastname')"
+                  name="lastname"
+                  dense
+                  type="text"
+                  v-model="filter.lastname"
+                  clearable
+                  @click:clear="getAffiliateList"
+                  @keypress.enter="getAffiliateList"
+                ></v-text-field>
+              </v-col>
+              <v-col md="3" sm="3" cols="12">
+                <v-text-field
+                  id="email"
+                  :label="$t('fields.email')"
+                  name="email"
+                  dense
+                  type="text"
+                  v-model="filter.email"
+                  clearable
+                  @click:clear="getAffiliateList"
+                  @keypress.enter="getAffiliateList"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-row no-gutters>
+              <v-col class="text-right">
+                <v-btn color="primary" small @click="getAffiliateList">{{$t("label.search")}}</v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </div>
+      </v-expand-transition>
+
       <v-card-text>
         <v-layout v-resize="onResize" column>
           <v-data-table
@@ -12,6 +86,7 @@
             :height="affiliates.windowSize.y - 210"
             :loading="flags.isAffiliateTableLoading"
             :fixed-header="true"
+            multi-sort
           >
             <template v-slot:top>
               <v-btn color="primary" small @click="openCreateDialog">
@@ -20,7 +95,7 @@
                 }}
               </v-btn>
             </template>
-            <template v-slot:item.name="{ item }">{{ `${item.firstname} ${item.lastname}` }}</template>
+            <template v-slot:item.firstname="{ item }">{{ `${item.firstname} ${item.lastname}` }}</template>
             <template v-slot:item.index="{ item }">{{ item.index + 1 }}</template>
             <template v-slot:item.actions="{ item }">
               <v-btn color="warning" small @click="openUpdateDialog(item.id)">
@@ -28,7 +103,11 @@
                 $t("label.update")
                 }}
               </v-btn>&nbsp;
-              <v-btn color="error" small @click="openDeleteDialog(item.id)">{{ $t("label.delete") }}</v-btn>
+              <v-btn
+                color="error"
+                small
+                @click="openDeleteDialog(item.id, item.code)"
+              >{{ $t("label.delete") }}</v-btn>
             </template>
           </v-data-table>
         </v-layout>
@@ -52,10 +131,64 @@
         <v-card-text class="pa-2 ma-0">
           <v-row dense>
             <v-col>
-              <affiliate-create :closeDialog="closeDialog" />
+              <affiliate-create v-if="flags.isCreateDialogOpen" :closeDialog="closeDialog" />
             </v-col>
           </v-row>
         </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="flags.isUpdateDialogOpen"
+      fullscreen
+      hide-overlay
+      persistent
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar dark color="primary" class="pa-0 ma-0 fullscreen-toolbar-header">
+          <v-btn icon @click="flags.isUpdateDialogOpen = false">
+            <v-icon left>mdi-arrow-left-thick</v-icon>
+          </v-btn>
+          {{$t("affiliateManagement.update.title")}}
+        </v-toolbar>
+        <v-card-text class="pa-2 ma-0">
+          <v-row dense>
+            <v-col>
+              <affiliate-update
+                v-if="flags.isUpdateDialogOpen"
+                :id="childData.updateId"
+                :closeDialog="closeDialog"
+              />
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="flags.isDeleteDialogOpen" max-width="290">
+      <v-card>
+        <v-card-title class="headline">{{$t("label.delete")}}</v-card-title>
+
+        <v-card-text v-html="$t('dialog.askDelete', {item: deleteDialog.deleteAffCode})"></v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="primary"
+            :loading="flags.isDeleteBeingProcess"
+            text
+            @click="flags.isDeleteDialogOpen = false"
+          >{{$t("label.cancel")}}</v-btn>
+
+          <v-btn
+            color="primary"
+            text
+            @click="remove"
+            :loading="flags.isDeleteBeingProcess"
+          >{{$t("label.delete")}}</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -63,14 +196,22 @@
 
 <script>
 import AffiliateCreate from "../components/affiliate-management/AffiliateCreate";
+import AffiliateUpdate from "../components/affiliate-management/AffiliateUpdate";
 
 export default {
   name: "AffiliateManagement",
   components: {
-    AffiliateCreate
+    AffiliateCreate,
+    AffiliateUpdate
   },
   data: () => {
     return {
+      filter: {
+        code: "",
+        firstname: "",
+        lastname: "",
+        email: ""
+      },
       affiliates: {
         options: {
           page: 1,
@@ -89,14 +230,50 @@ export default {
           y: 0
         }
       },
+      childData: {
+        updateId: -1
+      },
+      deleteDialog: {
+        deleteId: -1,
+        deleteAffCode: ""
+      },
       flags: {
         isCreateDialogOpen: false,
+        isUpdateDialogOpen: false,
+        isDeleteDialogOpen: false,
         isAffiliateTableLoading: false,
-        isUpdateDialogOpen: false
+        isFilterMenuOpen: false,
+        isDeleteBeingProcess: false
       }
     };
   },
+  watch: {
+    "affiliates.options": function(newVal, oldVal) {
+      this.getAffiliateList();
+    }
+  },
   methods: {
+    remove() {
+      this.flags.isDeleteBeingProcess = true;
+      this.axios
+        .delete(`backoffice/affiliate/${this.deleteDialog.deleteId}`)
+        .then(response => {
+          this.toast(
+            this.$t("success.itemDeleted", {
+              itemName: this.$t("label.affiliate")
+            }),
+            "success"
+          );
+
+          this.flags.isDeleteBeingProcess = false;
+          this.flags.isDeleteDialogOpen = false;
+          this.getAffiliateList();
+        })
+        .catch(error => {
+          console.log(error);
+          this.toast(this.$t("error.response.data"), "error");
+        });
+    },
     closeDialog(name) {
       switch (name) {
         case "create":
@@ -111,14 +288,29 @@ export default {
     openCreateDialog() {
       this.flags.isCreateDialogOpen = true;
     },
-    openDeleteDialog(affId) {},
-    openUpdateDialog(affId) {},
+    openDeleteDialog(affId, affCode) {
+      this.deleteDialog.deleteId = affId;
+      this.deleteDialog.deleteAffCode = affCode;
+
+      this.flags.isDeleteDialogOpen = true;
+    },
+    openUpdateDialog(affId) {
+      this.childData.updateId = affId;
+      this.flags.isUpdateDialogOpen = true;
+    },
     getAffiliateList() {
       this.flags.isAffiliateTableLoading = true;
+
       const params = {
         page: this.affiliates.options.page,
-        limit: this.affiliates.options.itemsPerPage
+        limit: this.affiliates.options.itemsPerPage,
+        filter: this.filter,
+        order: [
+          ...this.affiliates.options.sortBy,
+          ...this.affiliates.options.sortDesc.map(s => (s ? "DESC" : "ASC"))
+        ]
       };
+
       this.axios
         .get("backoffice/affiliate", { params })
         .then(response => {
@@ -141,7 +333,6 @@ export default {
   },
   mounted() {
     this.onResize();
-    this.getAffiliateList();
   },
   computed: {
     affiliateTableList() {
@@ -161,25 +352,25 @@ export default {
         {
           text: this.$t("affiliateManagement.tableHeader.code"),
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "code"
         },
         {
           text: this.$t("affiliateManagement.tableHeader.name"),
           align: "start",
-          sortable: false,
-          value: "name"
+          sortable: true,
+          value: "firstname"
         },
         {
           text: this.$t("affiliateManagement.tableHeader.email"),
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "email"
         },
         {
           text: this.$t("affiliateManagement.tableHeader.phone"),
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "phone"
         },
         {

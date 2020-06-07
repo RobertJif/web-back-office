@@ -4,7 +4,12 @@
     "manage": "Kelola",
     "create": "Tambah",
     "update": "Ubah",
-    "delete": "Hapus"
+    "delete": "Hapus",
+    "submit": "Kirim",
+    "affiliate": "Affiliate",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "search": "Cari"
   },
   "error": {
     "userNotValid": "Anda tidak memiliki hak akses, silahkan masuk dahulu.",
@@ -34,13 +39,26 @@
       "email": "Email",
       "phone": "Telepon",
       "actions": "Aksi"
+    },
+    "create": {
+      "accountInformation": "Informasi Akun",
+      "personalInformation": "Informasi Pribadi",
+      "title": "Buat affiliate baru"
+    },
+    "update": {
+      "accountInformation": "Informasi Akun",
+      "personalInformation": "Informasi Pribadi",
+      "title": "Perbaharui informasi affiliate"
     }
   },
   "fields": {
     "affCode": "Kode Affiliate",
     "email": "Email",
     "password": "Kata Sandi",
-    "username": "Nama Pengguna"
+    "username": "Nama Pengguna",
+    "firstname": "Nama Depan",
+    "lastname": "Nama Belakang",
+    "phone": "Telepon"
   },
   "validation": {
     "alpha": "{_field_} hanya boleh mengandung karakter alfabet",
@@ -67,7 +85,8 @@
     "regex": "Format {_field_} salah",
     "required": "{_field_} harus diisi",
     "required_if": "{_field_} harus diisi",
-    "size": "{_field_} harus lebih kecil dari {size}KB"
+    "size": "{_field_} harus lebih kecil dari {size}KB",
+    "strongPassword": "{_field_} harus mengandung 1 huruf kapital, angka, dan karakter khusus"
   },
   "$vuetify": {
     "badge": "Lencana",
@@ -119,5 +138,16 @@
       "am": "AM",
       "pm": "PM"
     }
+  },
+  "success": {
+    "itemCreated": "{itemName} baru berhasil dibuat",
+    "itemUpdated": "Data {itemName} berhasil diperbaharui",
+    "itemDeleted": "{itemName} berhasil dihapus"
+  },
+  "tooltip": {
+    "openFilterMenu": "Buka menu filter untuk tabel daftar affiliate"
+  },
+  "dialog": {
+    "askDelete": "Hapus {item}?<br/>Data yang sudah dihapus tidak dapat dikembalikan nantinya."
   }
 }

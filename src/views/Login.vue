@@ -107,7 +107,7 @@ export default {
           })
           .catch(error => {
             console.log(error);
-            this.toast(error.response.data, "error");
+            this.toast(this.$t("error.response.data"), "error");
           });
       } else {
         this.$refs.observer.validate();

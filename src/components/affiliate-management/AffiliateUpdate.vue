@@ -4,7 +4,7 @@
       <v-row dense>
         <v-col>
           <v-card color="secondary">
-            <v-card-actions>{{$t("affiliateManagement.create.accountInformation")}}</v-card-actions>
+            <v-card-actions>{{$t("affiliateManagement.update.accountInformation")}}</v-card-actions>
             <v-card-text class="form-card-text">
               <v-row dense>
                 <v-col>
@@ -18,26 +18,7 @@
                       v-model="formData.code"
                       required
                       :error-messages="errors"
-                      @keypress.enter="create(valid)"
-                    ></v-text-field>
-                  </validation-provider>
-                </v-col>
-                <v-col>
-                  <validation-provider
-                    name="password"
-                    rules="required|min:8|max:16|strongPassword"
-                    v-slot="{ errors }"
-                  >
-                    <v-text-field
-                      id="password"
-                      :label="$t('fields.password')"
-                      name="password"
-                      dense
-                      type="password"
-                      v-model="formData.password"
-                      required
-                      :error-messages="errors"
-                      @keypress.enter="create(valid)"
+                      @keypress.enter="update(valid)"
                     ></v-text-field>
                   </validation-provider>
                 </v-col>
@@ -49,7 +30,7 @@
       <v-row dense>
         <v-col>
           <v-card color="secondary">
-            <v-card-actions>{{$t("affiliateManagement.create.personalInformation")}}</v-card-actions>
+            <v-card-actions>{{$t("affiliateManagement.update.personalInformation")}}</v-card-actions>
             <v-card-text class="form-card-text">
               <v-row dense>
                 <v-col>
@@ -63,7 +44,7 @@
                       v-model="formData.firstname"
                       required
                       :error-messages="errors"
-                      @keypress.enter="create(valid)"
+                      @keypress.enter="update(valid)"
                     ></v-text-field>
                   </validation-provider>
                 </v-col>
@@ -78,7 +59,7 @@
                       v-model="formData.lastname"
                       required
                       :error-messages="errors"
-                      @keypress.enter="create(valid)"
+                      @keypress.enter="update(valid)"
                     ></v-text-field>
                   </validation-provider>
                 </v-col>
@@ -95,7 +76,7 @@
                       v-model="formData.email"
                       required
                       :error-messages="errors"
-                      @keypress.enter="create(valid)"
+                      @keypress.enter="update(valid)"
                     ></v-text-field>
                   </validation-provider>
                 </v-col>
@@ -113,7 +94,7 @@
                       v-model="formData.phone"
                       required
                       :error-messages="errors"
-                      @keypress.enter="create(valid)"
+                      @keypress.enter="update(valid)"
                     ></v-text-field>
                   </validation-provider>
                 </v-col>
@@ -124,7 +105,7 @@
       </v-row>
       <v-row dense>
         <v-col class="text-right">
-          <v-btn color="primary" @click="create(valid)">{{$t("label.submit")}}</v-btn>
+          <v-btn color="primary" @click="update(valid)">{{$t("label.save")}}</v-btn>
         </v-col>
       </v-row>
     </v-form>
@@ -135,7 +116,8 @@
 export default {
   name: "AffiliateCreate",
   props: {
-    closeDialog: Function
+    closeDialog: Function,
+    id: [Number, String]
   },
   data: () => {
     return {
@@ -144,24 +126,38 @@ export default {
         firstname: "",
         lastname: "",
         email: "",
-        phone: "",
-        password: ""
+        phone: ""
       }
     };
   },
+  mounted() {
+    this.getAffiliateById();
+  },
   methods: {
-    create(isValid) {
+    getAffiliateById() {
+      this.axios
+        .get(`backoffice/affiliate/${this.id}`)
+        .then(response => {
+          this.formData = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+          this.toast(this.$t("error.response.data"), "error");
+          this.closeDialog("update");
+        });
+    },
+    update(isValid) {
       if (isValid) {
         this.axios
-          .post("backoffice/affiliate", this.formData)
+          .put(`backoffice/affiliate/${this.id}`, this.formData)
           .then(response => {
             this.toast(
-              this.$t("success.itemCreated", {
+              this.$t("success.itemUpdated", {
                 itemName: this.$t("label.affiliate")
               }),
               "success"
             );
-            this.closeDialog("create");
+            this.closeDialog("update");
           })
           .catch(error => {
             console.log(error);

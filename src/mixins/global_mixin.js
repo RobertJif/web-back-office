@@ -3,6 +3,7 @@ import store from "../store/index";
 export default {
   methods: {
     changeLocale(locale) {
+      localStorage.setItem("locale", locale)
       this.$i18n.locale = locale;
     },
     logout() {
