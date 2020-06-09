@@ -53,11 +53,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const params = {
-    token: localStorage.getItem("accessToken"),
+    token: localStorage.getItem("accessToken")
   };
 
   Vue.axios.post("auth", params).then((auth) => {
-    console.log("Auth");
+
     if (to.path !== "/login" && to.path !== "login" && !auth.data) {
       next({ path: "/login" });
     } else if ((to.path === "/login" || to.path === "login") && auth.data) {
@@ -65,7 +65,9 @@ router.beforeEach((to, from, next) => {
     } else {
       next();
     }
-  });
+  })
+
+
 });
 
 export default router;

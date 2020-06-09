@@ -85,8 +85,8 @@ export default {
   data: () => {
     return {
       formData: {
-        username: "",
-        password: ""
+        username: "borobert",
+        password: "Robert123"
       },
       flags: {
         formValid: false

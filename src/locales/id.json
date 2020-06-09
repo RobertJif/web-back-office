@@ -14,7 +14,8 @@
   "error": {
     "userNotValid": "Anda tidak memiliki hak akses, silahkan masuk dahulu.",
     "userNotExist": "Nama pengguna tidak ditemukan",
-    "passwordNotMatch": "Kata sandi belum benar"
+    "passwordNotMatch": "Kata sandi belum benar",
+    "serverDown": "Terjadi kesalahan dengan server, silahkan coba beberapa saat lagi"
   },
   "base": {
     "account": "Akun",

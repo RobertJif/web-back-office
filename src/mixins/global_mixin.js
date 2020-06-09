@@ -7,9 +7,18 @@ export default {
       this.$i18n.locale = locale;
     },
     logout() {
-      this.$store.dispatch("REMOVE_USER_DATA").then(() => {
-        this.$router.push({ path: "/login" });
-      });
+      const params = { username: localStorage.getItem("username") }
+      this.axios.delete("signout", { params })
+        .then(response => {
+
+          this.$store.dispatch("REMOVE_USER_DATA").then(() => {
+            this.$router.push({ path: "/login" });
+          });
+        })
+        .catch(error => {
+          this.toast(this.$t(error.response.data), "error")
+        })
+
     },
     toast(text, color, active = true) {
       this.$store.dispatch("UPDATE_SNACKBAR", {

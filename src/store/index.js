@@ -14,6 +14,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_REFRESH_TOKEN(state, data) {
+      localStorage.setItem("refreshToken", data.refreshToken);
+    },
     SET_ACCESS_TOKEN(state, data) {
       localStorage.setItem("accessToken", data.accessToken);
     },
@@ -23,6 +26,9 @@ export default new Vuex.Store({
     },
     REMOVE_ACCESS_TOKEN(state, data) {
       localStorage.removeItem("accessToken");
+    },
+    REMOVE_REFRESH_TOKEN(state, data) {
+      localStorage.removeItem("refreshToken");
     },
     REMOVE_USER_DATA(state, data) {
       localStorage.removeItem("username");
@@ -35,6 +41,7 @@ export default new Vuex.Store({
   actions: {
     REMOVE_USER_DATA({ commit }) {
       return new Promise((resolve) => {
+        commit("REMOVE_REFRESH_TOKEN");
         commit("REMOVE_ACCESS_TOKEN");
         commit("REMOVE_USER_DATA");
         resolve();
@@ -43,6 +50,7 @@ export default new Vuex.Store({
     UPDATE_USER_DATA({ commit }, data) {
       return new Promise((resolve) => {
         commit("SET_ACCESS_TOKEN", data);
+        commit("SET_REFRESH_TOKEN", data);
         commit("SET_USER_DATA", data);
 
         resolve();

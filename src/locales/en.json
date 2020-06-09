@@ -14,7 +14,8 @@
   "error": {
     "userNotValid": "You do not have permission, please sign in.",
     "userNotExist": "Username does not exist",
-    "passwordNotMatch": "Invalid Password"
+    "passwordNotMatch": "Invalid Password",
+    "serverDown": "There is a problem connecting to server. please try again later"
   },
   "success": {
     "itemCreated": "New {itemName} created successfully",
